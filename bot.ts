@@ -1,6 +1,7 @@
 import { Bot, Context, GrammyError,HttpError } from "grammy";
 import { ConversationFlavor } from "@grammyjs/conversations";
 import type { ParseModeFlavor } from "@grammyjs/parse-mode";
+import { openAi } from "./src/modules/openai/openAIChatModule";
 
 
 
@@ -14,6 +15,7 @@ interface MainContext extends Context {
   }
 const bot = new Bot<ParseModeFlavor<MainContext & ConversationFlavor>>(`${process.env.BOT_TOKEN}`);
 
+bot.use(openAi);
 
 
 bot.command("start", (ctx) => ctx.reply("Hi"));
